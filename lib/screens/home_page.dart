@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    topStoryBloc..topStories();
+   // topStoryBloc..topStories();
     return Scaffold(
         appBar: AppBar(
           title: Text("Hacker News"),
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                            "${_stories[index].commentIds.length}",
+                            "${_stories[index].kids.length}",
                             style: TextStyle(color: Colors.white)),
                       )),
                 ),

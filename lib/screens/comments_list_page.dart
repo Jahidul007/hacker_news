@@ -7,6 +7,8 @@ class CommentListPage extends StatefulWidget {
   final List<Comment> comments;
   final Story story;
 
+  bool isLoading = false;
+
   CommentListPage({this.story, this.comments});
 
   @override
@@ -30,7 +32,7 @@ class _CommentListPageState extends State<CommentListPage> {
         appBar:
             AppBar(title: Text(story.title), backgroundColor: Colors.orange),
         body: ListView.builder(
-          itemCount: story.commentIds.length,
+          itemCount: story.kids.length,
           itemBuilder: (context, index) {
             return ListTile(
                 leading: Container(
@@ -38,14 +40,17 @@ class _CommentListPageState extends State<CommentListPage> {
                     width: 35,
                     height: 35,
                     decoration: BoxDecoration(
-                        color: Colors.purple,
+                        color: Colors.orange,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Text("${1 + index}",
                         style: TextStyle(fontSize: 22, color: Colors.white))),
                 title: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(this.widget.comments[index].text,
-                      style: TextStyle(fontSize: 18)),
+                  child: Text(
+                    this.widget.comments[index].text ?? "",
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.justify,
+                  ),
                 ));
           },
         ));

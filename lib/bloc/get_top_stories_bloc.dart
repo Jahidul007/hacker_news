@@ -1,21 +1,62 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:hacker_news/bloc/base_bloc.dart';
 import 'package:hacker_news/model/story.dart';
 import 'package:hacker_news/repository/repository.dart';
+class HackerNewsBloc extends Bloc {
+  static const int INIT_PAGE_SIZE = 10;
+  static const int PAGE_SIZE = 3;
 
-class TopStoryListBloc {
-  final NewsRepository _repository = NewsRepository();
+  final _topStoryIds = List<int>();
+  final _topStories = List<Story>();
+  final _repository = NewsRepository();
 
-  List<Story> stories;
+  var _isLoadingMoreTopStories = false;
+  var _currentStoryIndex = 0;
 
-  topStories() async {
-    final responses = await _repository.getTopStories();
-    stories = responses.map((response) {
-      final json = jsonDecode(response.body);
-      return Story.fromJSON(json);
-    }).toList();
-    return stories;
+  StreamController<List<Story>> _topStoriesStreamController = StreamController();
+
+  Stream<List<Story>> get topStories => _topStoriesStreamController.stream;
+
+  HackerNewsBloc() {
+    _loadInitTopStories();
+  }
+
+  void _loadInitTopStories() async {
+    try {
+      _topStoryIds.addAll(await _repository.loadTopStoryIds());
+    } catch (e) {
+      _topStoriesStreamController.sink.addError('Unknown Error');
+      return;
+    }
+
+    loadMoreTopStories(pageSize: INIT_PAGE_SIZE);
+  }
+
+  void loadMoreTopStories({int pageSize = PAGE_SIZE}) async {
+    if (_isLoadingMoreTopStories) return;
+
+    _isLoadingMoreTopStories = true;
+    final storySize = min(_currentStoryIndex + pageSize, _topStoryIds.length);
+    for (int index = _currentStoryIndex; index < storySize; index++) {
+      try {
+        _topStories.add(await _repository.loadStory(_topStoryIds[index]));
+      } catch (e) {
+        print('Failed to load story with id ${_topStoryIds[index]}');
+      }
+    }
+    _currentStoryIndex = _topStories.length;
+    _topStoriesStreamController.sink.add(_topStories);
+    _isLoadingMoreTopStories = false;
+  }
+
+  bool hasMoreStories() => _currentStoryIndex < _topStoryIds.length;
+
+  @override
+  void dispose() {
+    _topStoriesStreamController.close();
+    _repository.dispose();
   }
 }
-
-final topStoryBloc = TopStoryListBloc();

@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
-        topStoryBloc..topStories();
+       // topStoryBloc..topStories();
         Navigator.push(
             context,
             MaterialPageRoute(

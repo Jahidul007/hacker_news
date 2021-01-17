@@ -1,17 +1,50 @@
+
 class Story {
+  int score;
+  String author;
+  int id;
+  int time;
+  String title;
+  String type;
+  int descendants;
+  String url;
+  List<int> kids;
 
-  final String title;
-  final String url;
-  List<int> commentIds = List<int>();
+  Story({
+    this.score,
+    this.author,
+    this.id,
+    this.time,
+    this.title,
+    this.type,
+    this.descendants,
+    this.url,
+    this.kids,
+  });
 
-  Story({this.title,this.url,this.commentIds});
-
-  factory Story.fromJSON(Map<String,dynamic> json) {
-    return Story(
-        title: json["title"],
-        url: json["url"],
-        commentIds: json["kids"] == null ? List<int>() : json["kids"].cast<int>()
-    );
+  Story.fromJSON(Map<String, dynamic> json) {
+    score = json['score'];
+    author = json['by'];
+    id = json['id'];
+    time = json['time'];
+    title = json['title'];
+    type = json['type'];
+    descendants = json['descendants'];
+    url = json['url'];
+    kids = json['kids']?.cast<int>();
   }
 
+  Map<String, dynamic> toJSON() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['score'] = this.score;
+    data['by'] = this.author;
+    data['id'] = this.id;
+    data['time'] = this.time;
+    data['title'] = this.title;
+    data['type'] = this.type;
+    data['descendants'] = this.descendants;
+    data['url'] = this.url;
+    data['kids'] = this.kids;
+    return data;
+  }
 }
