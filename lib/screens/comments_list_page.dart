@@ -30,7 +30,7 @@ class _CommentListPageState extends State<CommentListPage> {
         appBar:
             AppBar(title: Text(story.title), backgroundColor: Colors.orange),
         body: ListView.builder(
-          itemCount: comments.length,
+          itemCount: story.commentIds.length,
           itemBuilder: (context, index) {
             return ListTile(
                 leading: Container(
