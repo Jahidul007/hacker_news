@@ -40,12 +40,17 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hacker News'), centerTitle: true,),
+      appBar: AppBar(
+        title: Text('Hacker News'),
+        centerTitle: true,
+      ),
       body: StreamBuilder(
         stream: _bloc.topStories,
         builder: (BuildContext context, AsyncSnapshot<List<Story>> snapshot) {
-          if (snapshot.hasData) return _buildTopStories(topStories: snapshot.data);
-          if (snapshot.hasError) return Center(child: Text('${snapshot.error}'));
+          if (snapshot.hasData)
+            return _buildTopStories(topStories: snapshot.data);
+          if (snapshot.hasError)
+            return Center(child: Text('${snapshot.error}'));
           return Center(child: CircularProgressIndicator());
         },
       ),
@@ -53,7 +58,8 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   }
 
   void _loadMoreTopStoriesIfNeed() {
-    final offsetToEnd = _scrollController.position.maxScrollExtent - _scrollController.position.pixels;
+    final offsetToEnd = _scrollController.position.maxScrollExtent -
+        _scrollController.position.pixels;
     final threshold = MediaQuery.of(context).size.height / 3;
     final shouldLoadMore = offsetToEnd < threshold;
     if (shouldLoadMore) {
@@ -64,7 +70,8 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   Widget _buildTopStories({List<Story> topStories}) {
     return ListView.builder(
       controller: _scrollController,
-      itemCount: _bloc.hasMoreStories() ? topStories.length + 1 : topStories.length,
+      itemCount:
+          _bloc.hasMoreStories() ? topStories.length + 1 : topStories.length,
       itemBuilder: (BuildContext context, int index) {
         if (index == topStories.length) {
           return Padding(
@@ -80,10 +87,32 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   Widget _buildStoryCardView({Story story}) {
     return Card(
       child: ListTile(
-        title: Text(story.title, style: TextStyle(fontWeight: FontWeight.bold),),
-        subtitle: Text(story.author, style: TextStyle(color: Colors.orange, fontStyle: FontStyle.italic),),
-        trailing: Text(story.score.toString(),style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold),),
-        onTap: () async{
+        title: Text(
+          story.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          story.author,
+          style: TextStyle(color: Colors.orange, fontStyle: FontStyle.italic),
+        ),
+        trailing: Container(
+            decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            alignment: Alignment.center,
+            width: 40,
+            height: 40,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                story.score.toString(),
+                style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
+        onTap: () async {
           final responses = await NewsRepository().getCommentsByStory(story);
           final comments = responses.map((response) {
             final json = jsonDecode(response.body);
@@ -92,9 +121,8 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CommentListPage(
-                      story: story,
-                      comments: comments)));
+                  builder: (context) =>
+                      CommentListPage(story: story, comments: comments)));
         },
       ),
     );

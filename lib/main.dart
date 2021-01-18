@@ -17,11 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: Provider<HackerNewsBloc>(
-        create: (context) => HackerNewsBloc(),
-        dispose: (context, bloc) => bloc.dispose(),
-        child: HackerNewsPage(),
-      ),
+      home: SplashScreen(),
     );
   }
 }

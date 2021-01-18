@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
 import 'package:hacker_news/screens/home_page.dart';
+import 'package:provider/provider.dart';
+
+import 'hacker_news_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
   Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 4000), vsync: this, value: 0.1);
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuint);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 4000), vsync: this, value: 0.1);
+    _animation =
+        CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuint);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
@@ -24,11 +30,17 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
-       // topStoryBloc..topStories();
+        // topStoryBloc..topStories();
+
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HomePage())); }
+                builder: (context) => Provider<HackerNewsBloc>(
+                      create: (context) => HackerNewsBloc(),
+                      dispose: (context, bloc) => bloc.dispose(),
+                      child: HackerNewsPage(),
+                    )));
+      }
     });
   }
 
@@ -65,7 +77,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image(image: NetworkImage("https://miro.medium.com/max/700/1*Odj6BW8rfq-gExKp_rJrdA.png"),
+                            child: Image(
+                              image: NetworkImage(
+                                  "https://miro.medium.com/max/700/1*Odj6BW8rfq-gExKp_rJrdA.png"),
                             ),
                           ),
                         ),
@@ -74,7 +88,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                         ),
                         Text(
                           "Hacker News",
-
                         ),
                       ],
                     ),
