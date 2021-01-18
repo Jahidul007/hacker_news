@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
-import 'package:hacker_news/screens/home_page.dart';
 import 'package:provider/provider.dart';
 
 import 'hacker_news_page.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String homeRoute = '/';
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -31,15 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
         // topStoryBloc..topStories();
-
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Provider<HackerNewsBloc>(
-                      create: (context) => HackerNewsBloc(),
-                      dispose: (context, bloc) => bloc.dispose(),
-                      child: HackerNewsPage(),
-                    )));
+        Navigator.pushNamedAndRemoveUntil(context, HackerNewsPage.newsPage,  (Route<dynamic> route) => false);
       }
     });
   }

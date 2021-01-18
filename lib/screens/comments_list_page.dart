@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news/Route/arguments.dart';
 import 'package:hacker_news/bloc/get_comments_bloc.dart';
 import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
 
 class CommentListPage extends StatefulWidget {
-  final List<Comment> comments;
-  final Story story;
+  static const String commentsPage = '/commentsPage';
+final Arguments args;
+  CommentListPage(this.args);
+  /*final List<Comment> comments;
+  final Story story;*/
 
-  bool isLoading = false;
 
-  CommentListPage({this.story, this.comments});
+  //CommentListPage({this.story, this.comments});
 
   @override
-  _CommentListPageState createState() => _CommentListPageState(story, comments);
+  _CommentListPageState createState() => _CommentListPageState(args);
 }
 
 class _CommentListPageState extends State<CommentListPage> {
-  Story story;
+  _CommentListPageState( this.args);
+  final Arguments args;
+
+/*  Story story;
   final List<Comment> comments;
 
-  _CommentListPageState(this.story, this.comments);
+  _CommentListPageState(this.story, this.comments);*/
 
   @override
   void initState() {
@@ -28,11 +34,12 @@ class _CommentListPageState extends State<CommentListPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("arguments ${args}");
     return Scaffold(
         appBar:
-            AppBar(title: Text(story.title), backgroundColor: Colors.orange),
+            AppBar(title: Text(args.story.title), backgroundColor: Colors.orange),
         body: ListView.builder(
-          itemCount: story.kids.length,
+          itemCount: args.story.kids.length,
           itemBuilder: (context, index) {
             return ListTile(
                 leading: Container(
@@ -47,7 +54,7 @@ class _CommentListPageState extends State<CommentListPage> {
                 title: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    this.widget.comments[index].text ?? "",
+                    args.comments[index].text ?? "",
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.justify,
                   ),

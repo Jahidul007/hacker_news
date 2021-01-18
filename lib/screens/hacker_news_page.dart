@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hacker_news/Route/arguments.dart';
 import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
 import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
@@ -10,6 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HackerNewsPage extends StatefulWidget {
+  static const String newsPage = '/newsPage';
+
   @override
   _HackerNewsPageState createState() => _HackerNewsPageState();
 }
@@ -85,6 +88,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   }
 
   Widget _buildStoryCardView({Story story}) {
+    bool _loading = false;
     return Card(
       child: ListTile(
         title: Text(
@@ -118,11 +122,9 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
             final json = jsonDecode(response.body);
             return Comment.fromJSON(json);
           }).toList();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      CommentListPage(story: story, comments: comments)));
+          print("story and comments: ${story} ${comments}");
+          Navigator.pushNamed(context, CommentListPage.commentsPage,
+              arguments: Arguments(comments, story));
         },
       ),
     );
