@@ -10,16 +10,16 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final Arguments args = settings.arguments;
     switch (settings.name) {
-      case '/':
+      case SplashScreen.homeRoute:
         return MaterialPageRoute(builder: (_) => SplashScreen());
-      case '/newsPage':
+      case HackerNewsPage.newsPage:
         return MaterialPageRoute(
             builder: (context) => Provider<HackerNewsBloc>(
                   create: (context) => HackerNewsBloc(),
                   dispose: (context, bloc) => bloc.dispose(),
                   child: HackerNewsPage(),
                 ));
-      case '/commentsPage':
+      case CommentListPage.commentsPage:
         return MaterialPageRoute(builder: (_) => CommentListPage(args));
       default:
         return MaterialPageRoute(

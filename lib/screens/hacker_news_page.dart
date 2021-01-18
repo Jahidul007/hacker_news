@@ -88,7 +88,6 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   }
 
   Widget _buildStoryCardView({Story story}) {
-    bool _loading = false;
     return Card(
       child: ListTile(
         title: Text(
