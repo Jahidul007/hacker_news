@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hacker_news/model/articles.dart';
 import 'package:hacker_news/model/story.dart';
 import 'package:http/http.dart' as http;
 import 'package:hacker_news/app_helper/url_helper.dart';
@@ -35,7 +36,7 @@ class NewsRepository {
     final response = await _httpClient.get('https://hacker-news.firebaseio.com/v0/item/$id.json');
     if (response.statusCode != 200) throw http.ClientException('Failed to load story with id $id');
 
-    print('loadStory: ${json.decode(response.body)}');
+    print('loadStory: ${Story.fromJSON(json.decode(response.body))}');
     return Story.fromJSON(json.decode(response.body));
   }
 
@@ -50,6 +51,28 @@ class NewsRepository {
   void dispose() {
    // http =
     _httpClient.close();
+  }
+
+}
+
+abstract class ArticleRepository {
+  Future<List<Articles>> getArticles();
+}
+
+class ArticleRepositoryImpl implements ArticleRepository {
+
+  @override
+  Future<List<Articles>> getArticles() async {
+    var response = await http.get(UrlHelper.cricArticleUrl);
+    print("data ${response.body}");
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      List<Articles> articles = ApiResultModel.fromJson(data).articles;
+      print("articles $articles");
+      return articles;
+    } else {
+      throw Exception();
+    }
   }
 
 }
