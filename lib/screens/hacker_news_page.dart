@@ -1,12 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/Route/arguments.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_bloc.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_event.dart';
 import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
 import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
 import 'package:hacker_news/repository/repository.dart';
 import 'package:hacker_news/screens/comments_list_page.dart';
+import 'package:hacker_news/screens/test_page.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +23,7 @@ class HackerNewsPage extends StatefulWidget {
 
 class _HackerNewsPageState extends State<HackerNewsPage> {
   HackerNewsBloc _bloc;
+  CommentsBloc commentsBloc;
 
   final _scrollController = ScrollController();
 
@@ -40,12 +45,33 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
     _bloc = Provider.of<HackerNewsBloc>(context);
   }
 
+  void handleClick(String value) {
+    switch (value) {
+      case 'Sports':
+        Navigator.pushNamed(context, TestPage.testPage);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Hacker News'),
-        centerTitle: true,
+        //centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            color: Colors.orangeAccent,
+              onSelected: handleClick,
+              itemBuilder: (BuildContext context) {
+                return {'Sports'}.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              }),
+        ],
       ),
       body: StreamBuilder(
         stream: _bloc.topStories,
@@ -129,11 +155,4 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
     );
   }
 
-  void _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 }

@@ -5,6 +5,7 @@ import 'package:hacker_news/bloc/news_bloc/news_event.dart';
 import 'package:hacker_news/bloc/news_bloc/news_state.dart';
 import 'package:hacker_news/model/articles.dart';
 import 'package:hacker_news/model/story.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TestPage extends StatefulWidget {
   static const String testPage = '/testPage';
@@ -28,7 +29,7 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test Page"),
+        title: Text("Sports News"),
       ),
       body: Container(
         child: BlocListener<ArticleBloc, ArticleState>(
@@ -95,12 +96,20 @@ class _TestPageState extends State<TestPage> {
               title: Text(articles[pos].title??""),
               subtitle: Text(articles[pos].author??""),
             ),
-            /*onTap: () {
-              navigateToArticleDetailPage(context, articles[pos]);
-            },*/
+            onTap: () {
+              _launchUrl(articles[pos].url);
+            },
           ),
         );
       },
     );
+  }
+
+  void _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
