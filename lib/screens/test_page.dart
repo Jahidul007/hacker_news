@@ -91,17 +91,7 @@ class _TestPageState extends State<TestPage> {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             child: ListTile(
-              leading: ClipOval(
-                child: Hero(
-                    tag: articles[pos].urlToImage,
-                  child: Image.network(
-                    articles[pos].urlToImage,
-                    fit: BoxFit.cover,
-                    height: 70.0,
-                    width: 70.0,
-                  ),
-                    ),
-              ),
+
               title: Text(articles[pos].title??""),
               subtitle: Text(articles[pos].author??""),
             ),
