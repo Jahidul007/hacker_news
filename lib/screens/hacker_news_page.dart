@@ -61,7 +61,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
         //centerTitle: true,
         actions: <Widget>[
           PopupMenuButton<String>(
-            color: Colors.orangeAccent,
+              color: Colors.orangeAccent,
               onSelected: handleClick,
               itemBuilder: (BuildContext context) {
                 return {'Sports'}.map((String choice) {
@@ -147,12 +147,10 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
             final json = jsonDecode(response.body);
             return Comment.fromJSON(json);
           }).toList();
-          print("story and comments: ${story} ${comments}");
           Navigator.pushNamed(context, CommentListPage.commentsPage,
               arguments: Arguments(comments, story));
         },
       ),
     );
   }
-
 }

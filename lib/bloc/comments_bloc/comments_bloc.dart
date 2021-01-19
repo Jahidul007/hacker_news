@@ -11,11 +11,10 @@ import 'package:http/src/response.dart';
 import 'package:meta/meta.dart';
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
 
-  ArticleRepository repository;
   NewsRepository repositoryComments;
   Story story;
 
-  CommentsBloc({@required this.repository, this.story}) : super(CommentsInitialState());
+  CommentsBloc({this.story}) : super(CommentsInitialState());
 
   @override
   // TODO: implement initialState

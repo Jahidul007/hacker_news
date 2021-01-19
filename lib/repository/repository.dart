@@ -36,7 +36,6 @@ class NewsRepository {
     final response = await _httpClient.get('https://hacker-news.firebaseio.com/v0/item/$id.json');
     if (response.statusCode != 200) throw http.ClientException('Failed to load story with id $id');
 
-    print('loadStory: ${Story.fromJSON(json.decode(response.body))}');
     return Story.fromJSON(json.decode(response.body));
   }
 
@@ -44,7 +43,6 @@ class NewsRepository {
     final response = await _httpClient.get('https://hacker-news.firebaseio.com/v0/topstories.json');
     if (response.statusCode != 200) throw http.ClientException('Failed to load top story ids');
 
-    print("loadTopStoryIds: ${json.decode(response.body)}");
     return List<int>.from(json.decode(response.body));
   }
 
@@ -68,7 +66,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       List<Articles> articles = ApiResultModel.fromJson(data).articles;
-      print("articles $articles");
+
       return articles;
     } else {
       throw Exception();

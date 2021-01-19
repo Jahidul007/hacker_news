@@ -8,11 +8,6 @@ class CommentListPage extends StatefulWidget {
   static const String commentsPage = '/commentsPage';
 final Arguments args;
   CommentListPage(this.args);
-  /*final List<Comment> comments;
-  final Story story;*/
-
-
-  //CommentListPage({this.story, this.comments});
 
   @override
   _CommentListPageState createState() => _CommentListPageState(args);
@@ -22,10 +17,6 @@ class _CommentListPageState extends State<CommentListPage> {
   _CommentListPageState( this.args);
   final Arguments args;
 
-/*  Story story;
-  final List<Comment> comments;
-
-  _CommentListPageState(this.story, this.comments);*/
 
   @override
   void initState() {
