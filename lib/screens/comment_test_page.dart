@@ -1,60 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/bloc/news_bloc/news_bloc.dart';
-import 'package:hacker_news/bloc/news_bloc/news_event.dart';
-import 'package:hacker_news/bloc/news_bloc/news_state.dart';
-import 'package:hacker_news/model/articles.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_bloc.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_event.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_state.dart';
+import 'package:hacker_news/model/comments.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TestPage extends StatelessWidget {
-  static const String testPage = '/testPage';
-  ArticleBloc articleBloc;
+class CommentPage extends StatefulWidget {
+  static const String comPage = '/comentPage';
+  @override
+  _CommentPageState createState() => _CommentPageState();
+}
 
-/*  @override
+class _CommentPageState extends State<CommentPage> {
+  CommentsBloc commentsBloc;
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    articleBloc = BlocProvider.of<ArticleBloc>(context);
-    articleBloc.add(FetchArticlesEvent());
-  }*/
-
+    commentsBloc = BlocProvider.of<CommentsBloc>(context);
+    commentsBloc.add(FetchCommentsEvent());
+  }
   @override
   Widget build(BuildContext context) {
-    articleBloc = BlocProvider.of<ArticleBloc>(context);
-    articleBloc.add(FetchArticlesEvent());
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Sports News"),
       ),
       body: Container(
-        child: BlocListener<ArticleBloc, ArticleState>(
+        child: BlocListener<CommentsBloc, CommentsState>(
           listener: (context, state) {
-            if (state is ArticleErrorState) {
+            if (state is CommentsErrorState) {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
                 ),
               );
-            } else{
-              Container();
             }
           },
-          child: BlocBuilder<ArticleBloc, ArticleState>(
+          child: BlocBuilder<CommentsBloc, CommentsState>(
             builder: (context, state) {
-              if (state is ArticleInitialState) {
+              if (state is CommentsInitialState) {
                 print("initaial page ");
                 return buildLoading();
-              } else if (state is ArticleLoadingState) {
+              } else if (state is CommentsLoadingState) {
                 print("initaial page loading");
                 return buildLoading();
-              } else if (state is ArticleLoadedState) {
-                print(" page loaded");
-                return buildArticleList(state.articles);
-              } else if (state is ArticleErrorState) {
+              } else if (state is CommentsLoadedState) {
+                print("page loaded");
+                return buildArticleList(state.comments);
+              } else if (state is CommentsErrorState) {
                 print("error");
                 return buildErrorUi(state.message);
-              } else {
+              } else{
                 return Container();
               }
             },
@@ -82,7 +81,7 @@ class TestPage extends StatelessWidget {
     );
   }
 
-  Widget buildArticleList(List<Articles> articles) {
+  Widget buildArticleList(List<Comment> articles) {
     return ListView.builder(
       itemCount: articles.length,
       itemBuilder: (ctx, pos) {
@@ -90,11 +89,12 @@ class TestPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             child: ListTile(
-              title: Text(articles[pos].title ?? ""),
-              subtitle: Text(articles[pos].author ?? ""),
+
+              title: Text(articles[pos].text??""),
+              subtitle: Text(articles[pos].commentId??""),
             ),
             onTap: () {
-              _launchUrl(articles[pos].url);
+              //_launchUrl(articles[pos].url);
             },
           ),
         );

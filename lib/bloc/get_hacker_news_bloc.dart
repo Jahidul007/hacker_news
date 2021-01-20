@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:hacker_news/bloc/base_bloc.dart';
 import 'package:hacker_news/model/story.dart';
-import 'package:hacker_news/repository/repository.dart';
+import 'package:hacker_news/repository/news_repository.dart';
 class HackerNewsBloc extends Bloc {
   static const int INIT_PAGE_SIZE = 10;
   static const int PAGE_SIZE = 3;

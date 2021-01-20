@@ -6,7 +6,7 @@ import 'package:hacker_news/bloc/news_bloc/news_state.dart';
 import 'package:hacker_news/model/articles.dart';
 import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
-import 'package:hacker_news/repository/repository.dart';
+import 'package:hacker_news/repository/news_repository.dart';
 import 'package:http/src/response.dart';
 import 'package:meta/meta.dart';
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
@@ -14,7 +14,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
   NewsRepository repositoryComments;
   Story story;
 
-  CommentsBloc({this.story}) : super(CommentsInitialState());
+  CommentsBloc({@required this.repositoryComments, this.story}) : super(CommentsInitialState());
 
   @override
   // TODO: implement initialState

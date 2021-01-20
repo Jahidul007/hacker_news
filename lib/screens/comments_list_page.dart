@@ -6,7 +6,7 @@ import 'package:hacker_news/model/story.dart';
 
 class CommentListPage extends StatefulWidget {
   static const String commentsPage = '/commentsPage';
-final Arguments args;
+  final Arguments args;
   CommentListPage(this.args);
 
   @override

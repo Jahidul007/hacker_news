@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
-import 'package:provider/provider.dart';
 
 import 'hacker_news_page.dart';
 

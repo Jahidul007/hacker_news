@@ -4,7 +4,7 @@ import 'package:hacker_news/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'Route/route.dart';
-import 'bloc/get_top_stories_bloc.dart';
+import 'bloc/get_hacker_news_bloc.dart';
 
 void main() => runApp(MyApp());
 

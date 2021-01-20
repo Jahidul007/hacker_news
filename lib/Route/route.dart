@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/Route/arguments.dart';
-import 'package:hacker_news/bloc/get_top_stories_bloc.dart';
+import 'package:hacker_news/bloc/comments_bloc/comments_bloc.dart';
+import 'package:hacker_news/bloc/get_hacker_news_bloc.dart';
 import 'package:hacker_news/bloc/news_bloc/news_bloc.dart';
-import 'package:hacker_news/repository/repository.dart';
+import 'package:hacker_news/repository/article_repository_implement.dart';
+import 'package:hacker_news/repository/news_repository.dart';
+import 'package:hacker_news/screens/comment_test_page.dart';
 import 'package:hacker_news/screens/comments_list_page.dart';
 import 'package:hacker_news/screens/hacker_news_page.dart';
 import 'package:hacker_news/screens/splash_screen.dart';
@@ -31,6 +34,12 @@ class Router {
                   create: (context) => ArticleBloc(repository: ArticleRepositoryImpl()),
                   child: TestPage(),
                 ));
+      case CommentPage.comPage:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<CommentsBloc>(
+              create: (context) => CommentsBloc(repositoryComments: NewsRepository()),
+              child: CommentPage(),
+            ));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
