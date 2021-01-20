@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news/screens/news_test_page.dart';
 
 import 'hacker_news_page.dart';
 
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
         // topStoryBloc..topStories();
-        Navigator.pushNamedAndRemoveUntil(context, HackerNewsPage.newsPage,  (Route<dynamic> route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, NewsTestPage.newsTestPage,  (Route<dynamic> route) => false);
       }
     });
   }

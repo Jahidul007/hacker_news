@@ -36,7 +36,7 @@ class NewsRepository {
         .get('https://hacker-news.firebaseio.com/v0/item/$id.json');
     if (response.statusCode != 200)
       throw http.ClientException('Failed to load story with id $id');
-print("story list ${Story.fromJSON(json.decode(response.body))}");
+    print("story list ${Story.fromJSON(json.decode(response.body)).title}");
     return Story.fromJSON(json.decode(response.body));
   }
 
@@ -45,7 +45,7 @@ print("story list ${Story.fromJSON(json.decode(response.body))}");
         .get('https://hacker-news.firebaseio.com/v0/topstories.json');
     if (response.statusCode != 200)
       throw http.ClientException('Failed to load top story ids');
-
+    print("list id ${List<int>.from(json.decode(response.body))}");
     return List<int>.from(json.decode(response.body));
   }
 

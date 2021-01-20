@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 class TestPage extends StatelessWidget {
   static const String testPage = '/testPage';
   ArticleBloc articleBloc;
-
 /*  @override
   void initState() {
     // TODO: implement initState

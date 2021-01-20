@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/screens/hacker_news_page.dart';
+import 'package:hacker_news/screens/news_test_page.dart';
 import 'package:hacker_news/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
