@@ -29,7 +29,10 @@ class Router {
                   child: HackerNewsPage(),
                 ));
       case CommentListPage.commentsPage:
-        return MaterialPageRoute(builder: (_) => CommentListPage(args));
+        return MaterialPageRoute(builder: (context) => BlocProvider<CommentsBloc>(
+          create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
+          child: CommentListPage(args),
+        ));
       case TestPage.testPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ArticleBloc>(
@@ -39,7 +42,7 @@ class Router {
       case CommentPage.comPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<CommentsBloc>(
-              create: (context) => CommentsBloc(repositoryComments: NewsRepository()),
+              create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
               child: CommentPage(),
             ));
       case NewsTestPage.newsTestPage:

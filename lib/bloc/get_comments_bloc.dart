@@ -1,3 +1,4 @@
+/*
 
 
 import 'dart:convert';
@@ -25,4 +26,4 @@ class CommentsBloc{
 
 }
 
-final commentsBloc = CommentsBloc();
+final commentsBloc = CommentsBloc();*/

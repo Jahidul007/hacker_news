@@ -87,10 +87,10 @@ class _NewsTestPageState extends State<NewsTestPage> {
           child: BlocBuilder<HackerBloc, HackerNewsState>(
             builder: (context, state) {
               if (state is HackerNewsInitialState) {
-                print("initaial page ");
+                print("initial page ");
                 return buildLoading();
               } else if (state is HackerNewsLoadingState) {
-                print("initaial page loading");
+                print("initial page loading");
                 return buildLoading();
               } else if (state is HackerNewsLoadedState) {
                 print(" page loaded");
@@ -165,13 +165,13 @@ class _NewsTestPageState extends State<NewsTestPage> {
               ),
             )),
         onTap: () async {
-          final responses = await NewsRepository().getCommentsByStory(story);
+          /*final responses = await NewsRepository().getCommentsByStory(story);
           final comments = responses.map((response) {
             final json = jsonDecode(response.body);
             return Comment.fromJSON(json);
-          }).toList();
+          }).toList();*/
           Navigator.pushNamed(context, CommentListPage.commentsPage,
-              arguments: Arguments(comments, story));
+              arguments: Arguments(story));
         },
       ),
     );

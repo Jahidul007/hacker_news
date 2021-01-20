@@ -148,7 +148,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
             return Comment.fromJSON(json);
           }).toList();
           Navigator.pushNamed(context, CommentListPage.commentsPage,
-              arguments: Arguments(comments, story));
+              arguments: Arguments(story));
         },
       ),
     );

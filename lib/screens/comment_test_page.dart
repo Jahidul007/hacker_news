@@ -4,10 +4,12 @@ import 'package:hacker_news/bloc/comments_bloc/comments_bloc.dart';
 import 'package:hacker_news/bloc/comments_bloc/comments_event.dart';
 import 'package:hacker_news/bloc/comments_bloc/comments_state.dart';
 import 'package:hacker_news/model/comments.dart';
+import 'package:hacker_news/model/story.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommentPage extends StatefulWidget {
   static const String comPage = '/commentTestPage';
+
   @override
   _CommentPageState createState() => _CommentPageState();
 }
@@ -20,13 +22,14 @@ class _CommentPageState extends State<CommentPage> {
     // TODO: implement initState
     super.initState();
     commentsBloc = BlocProvider.of<CommentsBloc>(context);
-    commentsBloc.add(FetchCommentsEvent());
+    //commentsBloc.add(FetchCommentsEvent(Story));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sports News"),
+        title: Text("Comment News"),
       ),
       body: Container(
         child: BlocListener<CommentsBloc, CommentsState>(
@@ -53,7 +56,7 @@ class _CommentPageState extends State<CommentPage> {
               } else if (state is CommentsErrorState) {
                 print("error");
                 return buildErrorUi(state.message);
-              } else{
+              } else {
                 return Container();
               }
             },
@@ -88,11 +91,28 @@ class _CommentPageState extends State<CommentPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            child: ListTile(
-
-              title: Text(articles[pos].text??""),
-              subtitle: Text(articles[pos].commentId??""),
-            ),
+            child: /*ListTile(
+              title: Text(articles[pos].text ?? ""),
+              subtitle: Text(articles[pos].commentId ?? ""),
+            ),*/
+            ListTile(
+                leading: Container(
+                    alignment: Alignment.center,
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Text("${1 + pos}",
+                        style: TextStyle(fontSize: 22, color: Colors.white))),
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    articles[pos].text ?? "",
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.justify,
+                  ),
+                )),
             onTap: () {
               //_launchUrl(articles[pos].url);
             },

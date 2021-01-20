@@ -15,28 +15,11 @@ class NewsRepository {
     }));
   }
 
-/*
-      Future<Response> _getStory(int storyId) {
-          return http.get(UrlHelper.urlForStory(storyId));
-      }
-    Future<List<Response>> getTopStories() async {
-    final response = await http.get(UrlHelper.urlForTopStories());
-    if (response.statusCode == 200) {
-      Iterable storyIds = jsonDecode(response.body);
-      return Future.wait(storyIds.take(10).map((storyId) {
-        return _getStory(storyId);
-      }));
-    } else {
-      throw Exception("Unable to fetch data!");
-    }
-  }*/
-
   Future<Story> loadStory(int id) async {
     final response = await _httpClient
         .get('https://hacker-news.firebaseio.com/v0/item/$id.json');
     if (response.statusCode != 200)
       throw http.ClientException('Failed to load story with id $id');
-    print("story list ${Story.fromJSON(json.decode(response.body)).title}");
     return Story.fromJSON(json.decode(response.body));
   }
 
@@ -45,7 +28,6 @@ class NewsRepository {
         .get('https://hacker-news.firebaseio.com/v0/topstories.json');
     if (response.statusCode != 200)
       throw http.ClientException('Failed to load top story ids');
-    print("list id ${List<int>.from(json.decode(response.body))}");
     return List<int>.from(json.decode(response.body));
   }
 

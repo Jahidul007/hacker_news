@@ -3,10 +3,10 @@ import 'package:hacker_news/model/story.dart';
 
 class Arguments{
 
-   final List<Comment> comments;
+  // final List<Comment> comments;
    final Story story;
 
-  Arguments(this.comments, this.story);
+  Arguments( this.story);
 
 
 }

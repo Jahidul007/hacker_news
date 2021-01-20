@@ -2,7 +2,7 @@ import 'package:hacker_news/model/story.dart';
 
 class Comment {
   String text = "";
-  final int commentId;
+  var commentId;
   Story story;
   Comment({this.commentId,this.text});
 
