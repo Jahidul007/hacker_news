@@ -33,7 +33,7 @@ class Router {
           create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
           child: CommentListPage(args),
         ));
-      case SportsPage.testPage:
+      case SportsPage.sportsPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ArticleBloc>(
                   create: (context) => ArticleBloc(repository: ArticleRepositoryImpl()),

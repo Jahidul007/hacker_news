@@ -48,7 +48,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   void handleClick(String value) {
     switch (value) {
       case 'Sports':
-        Navigator.pushNamed(context, SportsPage.testPage);
+        Navigator.pushNamed(context, SportsPage.sportsPage);
         break;
     }
   }

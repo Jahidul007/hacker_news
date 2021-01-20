@@ -7,7 +7,7 @@ import 'package:hacker_news/model/articles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SportsPage extends StatelessWidget {
-  static const String testPage = '/testPage';
+  static const String sportsPage = '/sportsPage';
   ArticleBloc articleBloc;
 /*  @override
   void initState() {
