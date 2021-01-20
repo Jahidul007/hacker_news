@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hacker_news/screens/news_test_page.dart';
+import 'package:hacker_news/screens/news_page.dart';
 
-import 'hacker_news_page.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String homeRoute = '/';
@@ -19,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 4000), vsync: this, value: 0.1);
+        duration: const Duration(milliseconds: 5000), vsync: this, value: 0.1);
     _animation =
         CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuint);
 
@@ -30,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
         // topStoryBloc..topStories();
-        Navigator.pushNamedAndRemoveUntil(context, NewsTestPage.newsTestPage,  (Route<dynamic> route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, NewsPage.newsTestPage,  (Route<dynamic> route) => false);
       }
     });
   }

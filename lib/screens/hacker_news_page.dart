@@ -10,7 +10,7 @@ import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
 import 'package:hacker_news/repository/news_repository.dart';
 import 'package:hacker_news/screens/comments_list_page.dart';
-import 'package:hacker_news/screens/test_page.dart';
+import 'package:hacker_news/screens/sports_page.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -48,7 +48,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
   void handleClick(String value) {
     switch (value) {
       case 'Sports':
-        Navigator.pushNamed(context, TestPage.testPage);
+        Navigator.pushNamed(context, SportsPage.testPage);
         break;
     }
   }

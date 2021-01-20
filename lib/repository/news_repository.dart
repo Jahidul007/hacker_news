@@ -32,7 +32,6 @@ class NewsRepository {
   }
 
   void dispose() {
-    // http =
     _httpClient.close();
   }
 }

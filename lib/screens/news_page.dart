@@ -11,16 +11,16 @@ import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
 import 'package:hacker_news/repository/news_repository.dart';
 import 'package:hacker_news/screens/comments_list_page.dart';
-import 'package:hacker_news/screens/test_page.dart';
+import 'package:hacker_news/screens/sports_page.dart';
 
-class NewsTestPage extends StatefulWidget {
+class NewsPage extends StatefulWidget {
   static const String newsTestPage = '/newsTestPage';
 
   @override
   _NewsTestPageState createState() => _NewsTestPageState();
 }
 
-class _NewsTestPageState extends State<NewsTestPage> {
+class _NewsTestPageState extends State<NewsPage> {
   HackerBloc hackerBloc;
   final _scrollController = ScrollController();
 
@@ -44,7 +44,7 @@ class _NewsTestPageState extends State<NewsTestPage> {
   void handleClick(String value) {
     switch (value) {
       case 'Sports':
-        Navigator.pushNamed(context, TestPage.testPage);
+        Navigator.pushNamed(context, SportsPage.testPage);
         break;
     }
   }

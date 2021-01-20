@@ -26,7 +26,6 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
           final json = jsonDecode(response.body);
           return Comment.fromJSON(json);
         }).toList();
-        print(" comments $comments");
         yield CommentsLoadedState(comments: comments);
       } catch (e) {
         print("error $e");

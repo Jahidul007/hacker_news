@@ -6,7 +6,7 @@ import 'package:hacker_news/bloc/news_bloc/news_state.dart';
 import 'package:hacker_news/model/articles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TestPage extends StatelessWidget {
+class SportsPage extends StatelessWidget {
   static const String testPage = '/testPage';
   ArticleBloc articleBloc;
 /*  @override

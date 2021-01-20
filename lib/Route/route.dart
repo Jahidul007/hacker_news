@@ -10,9 +10,9 @@ import 'package:hacker_news/repository/news_repository.dart';
 import 'package:hacker_news/screens/comment_test_page.dart';
 import 'package:hacker_news/screens/comments_list_page.dart';
 import 'package:hacker_news/screens/hacker_news_page.dart';
-import 'package:hacker_news/screens/news_test_page.dart';
+import 'package:hacker_news/screens/news_page.dart';
 import 'package:hacker_news/screens/splash_screen.dart';
-import 'package:hacker_news/screens/test_page.dart';
+import 'package:hacker_news/screens/sports_page.dart';
 import 'package:provider/provider.dart';
 
 class Router {
@@ -33,11 +33,11 @@ class Router {
           create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
           child: CommentListPage(args),
         ));
-      case TestPage.testPage:
+      case SportsPage.testPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ArticleBloc>(
                   create: (context) => ArticleBloc(repository: ArticleRepositoryImpl()),
-                  child: TestPage(),
+                  child: SportsPage(),
                 ));
       case CommentPage.comPage:
         return MaterialPageRoute(
@@ -45,11 +45,11 @@ class Router {
               create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
               child: CommentPage(),
             ));
-      case NewsTestPage.newsTestPage:
+      case NewsPage.newsTestPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<HackerBloc>(
               create: (context) => HackerBloc(repository: NewsRepository()),
-              child: NewsTestPage(),
+              child: NewsPage(),
             ));
       default:
         return MaterialPageRoute(
