@@ -7,7 +7,7 @@ import 'package:hacker_news/model/comments.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommentPage extends StatefulWidget {
-  static const String comPage = '/comentPage';
+  static const String comPage = '/commentTestPage';
   @override
   _CommentPageState createState() => _CommentPageState();
 }
