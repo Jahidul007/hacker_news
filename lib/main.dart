@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hacker_news/screens/hacker_news_page.dart';
-import 'package:hacker_news/screens/news_page.dart';
-import 'package:hacker_news/screens/splash_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:hacker_news/ui/Route/route.dart';
+import 'package:hacker_news/ui/features/splash/splash_screen.dart';
 
-import 'Route/route.dart';
-import 'bloc/get_hacker_news_bloc.dart';
 
 void main() => runApp(MyApp());
 

@@ -8,10 +8,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.2"
-  bloc:
+  ui.features.test.bloc:
     dependency: transitive
     description:
-      name: bloc
+      name: ui.features.test.bloc
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.1"
