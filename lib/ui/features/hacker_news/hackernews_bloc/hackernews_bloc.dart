@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
 import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:meta/meta.dart';
 
 import 'hackernews_event.dart';
@@ -20,7 +19,8 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
   var _isLoadingMoreTopStories = false;
   var _currentStoryIndex = 0;
 
-  StreamController<List<Story>> _topStoriesStreamController = StreamController();
+  StreamController<List<Story>> _topStoriesStreamController =
+      StreamController();
 
   Stream<List<Story>> get topStories => _topStoriesStreamController.stream;
 
@@ -51,7 +51,8 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
     yield HackerNewsLoadedState(story: _topStories);
   }
 
-  Stream<HackerNewsState> loadMoreTopStories({int pageSize = PAGE_SIZE}) async* {
+  Stream<HackerNewsState> loadMoreTopStories(
+      {int pageSize = PAGE_SIZE}) async* {
     if (_isLoadingMoreTopStories) return;
 
     _isLoadingMoreTopStories = true;
@@ -73,6 +74,6 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
   @override
   void dispose() {
     _topStoriesStreamController.close();
-   // repository.dispose();
+    // repository.dispose();
   }
 }

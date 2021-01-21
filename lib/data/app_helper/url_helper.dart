@@ -1,4 +1,6 @@
 class UrlHelper {
+  static String topStoryUrl= 'https://hacker-news.firebaseio.com/v0/topstories.json';
+
 
   static String urlForStory(int storyId) {
     return "https://hacker-news.firebaseio.com/v0/item/${storyId}.json?print=pretty";

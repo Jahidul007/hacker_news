@@ -141,13 +141,13 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
               ),
             )),
         onTap: () async {
-          final responses = await NewsRepositoryImplement().getCommentsByStory(story);
+          /*final responses = await NewsRepositoryImplement().getCommentsByStory(story);
           final comments = responses.map((response) {
             final json = jsonDecode(response.body);
             return Comment.fromJSON(json);
           }).toList();
           Navigator.pushNamed(context, CommentListPage.commentsPage,
-              arguments: Arguments(story));
+              arguments: Arguments(story));*/
         },
       ),
     );

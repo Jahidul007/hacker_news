@@ -34,7 +34,6 @@ class _CommentListPageState extends State<CommentListPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("arguments ${args}");
     return Scaffold(
       appBar:
           AppBar(title: Text(args.story.title), backgroundColor: Colors.orange),
@@ -93,7 +92,7 @@ class _CommentListPageState extends State<CommentListPage> {
 
   Widget buildArticleList(List<Comment> articles) {
     return ListView.builder(
-      itemCount: articles.length,
+      itemCount: articles.length??0,
       itemBuilder: (ctx, pos) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
