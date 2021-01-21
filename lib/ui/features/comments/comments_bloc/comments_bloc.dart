@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/comments.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:meta/meta.dart';
 
 import 'comments_event.dart';
 import 'comments_state.dart';
 
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
-  NewsRepository repositoryComments;
+  NewsRepositoryImplement repositoryComments;
   Story story;
 
   CommentsBloc({@required this.repositoryComments, this.story})

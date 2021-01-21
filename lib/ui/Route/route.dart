@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/data/repository/sportsnews/article_repository_implement.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/sportsnews/sports_news_repository_implement.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:hacker_news/ui/features/comments/comments_bloc/comments_bloc.dart';
 import 'package:hacker_news/ui/features/comments/comments_list_page.dart';
 import 'package:hacker_news/ui/features/hacker_news/hackernews_bloc/hackernews_bloc.dart';
@@ -31,7 +31,7 @@ class Router {
                 ));
       case CommentListPage.commentsPage:
         return MaterialPageRoute(builder: (context) => BlocProvider<CommentsBloc>(
-          create: (context) => CommentsBloc(repositoryComments: NewsRepository(),story: args.story),
+          create: (context) => CommentsBloc(repositoryComments: NewsRepositoryImplement(),story: args.story),
           child: CommentListPage(args),
         ));
       case SportsPage.sportsPage:
@@ -43,7 +43,7 @@ class Router {
       case NewsPage.newsTestPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<HackerBloc>(
-              create: (context) => HackerBloc(repository: NewsRepository()),
+              create: (context) => HackerBloc(repository: NewsRepositoryImplement()),
               child: NewsPage(),
             ));
       default:

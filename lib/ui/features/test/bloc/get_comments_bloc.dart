@@ -5,7 +5,7 @@ import 'dart:convert';
 
 import 'package:hacker_news/model/comments.dart';
 import 'package:hacker_news/model/story.dart';
-import 'package:hacker_news/repository/news_repository.dart';
+import 'package:hacker_news/repository/news_repository_implement.dart';
 
 class CommentsBloc{
 

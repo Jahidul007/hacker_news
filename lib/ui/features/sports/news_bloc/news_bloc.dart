@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:hacker_news/data/repository/sportsnews/model/articles.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
-import 'package:hacker_news/data/repository/sportsnews/article_repository.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/sportsnews/sports_news_repository.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:http/src/response.dart';
 import 'package:meta/meta.dart';
 

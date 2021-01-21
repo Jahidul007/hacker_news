@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 
 import 'base_bloc.dart';
 class HackerNewsBloc extends Bloc {
@@ -12,7 +12,7 @@ class HackerNewsBloc extends Bloc {
 
   final _topStoryIds = List<int>();
   final _topStories = List<Story>();
-  final _repository = NewsRepository();
+  final _repository = NewsRepositoryImplement();
 
   var _isLoadingMoreTopStories = false;
   var _currentStoryIndex = 0;

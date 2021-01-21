@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
 import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:meta/meta.dart';
 
 import 'hackernews_event.dart';
@@ -15,7 +16,6 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
 
   final _topStoryIds = List<int>();
   final _topStories = List<Story>();
-  final _repository = NewsRepository();
 
   var _isLoadingMoreTopStories = false;
   var _currentStoryIndex = 0;
@@ -42,7 +42,7 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
   Stream<HackerNewsState> _loadInitTopStories() async* {
     yield HackerNewsLoadingState();
     try {
-      _topStoryIds.addAll(await _repository.loadTopStoryIds());
+      _topStoryIds.addAll(await repository.loadTopStoryIds());
     } catch (e) {
       _topStoriesStreamController.sink.addError('Unknown Error');
       return;
@@ -58,7 +58,7 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
     final storySize = min(_currentStoryIndex + pageSize, _topStoryIds.length);
     for (int index = _currentStoryIndex; index < storySize; index++) {
       try {
-        _topStories.add(await _repository.loadStory(_topStoryIds[index]));
+        _topStories.add(await repository.loadStory(_topStoryIds[index]));
       } catch (e) {
         print('Failed to load story with id ${_topStoryIds[index]}');
       }
@@ -73,6 +73,6 @@ class HackerBloc extends Bloc<HackerNewsEvent, HackerNewsState> {
   @override
   void dispose() {
     _topStoriesStreamController.close();
-    _repository.dispose();
+   // repository.dispose();
   }
 }

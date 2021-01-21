@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/comments.dart';
 import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
-import 'package:hacker_news/data/repository/hacker_news/news_repository.dart';
+import 'package:hacker_news/data/repository/hacker_news/news_repository_implement.dart';
 import 'package:hacker_news/ui/Route/arguments.dart';
 import 'package:hacker_news/ui/features/comments/comments_bloc/comments_bloc.dart';
 import 'package:hacker_news/ui/features/comments/comments_list_page.dart';
@@ -141,7 +141,7 @@ class _HackerNewsPageState extends State<HackerNewsPage> {
               ),
             )),
         onTap: () async {
-          final responses = await NewsRepository().getCommentsByStory(story);
+          final responses = await NewsRepositoryImplement().getCommentsByStory(story);
           final comments = responses.map((response) {
             final json = jsonDecode(response.body);
             return Comment.fromJSON(json);
