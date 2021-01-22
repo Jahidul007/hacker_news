@@ -1,15 +1,29 @@
+import 'package:hacker_news/data/app_helper/url_helper.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
-class RestApi {
+class HackerNewsRestApi {
   final _httpClient = http.Client();
 
-  Future<dynamic> get(String url) async {
+  Future<dynamic>getHackernewsId() async {
     var responseJson;
     try {
-      final response = await _httpClient.get(url);
+      final response = await _httpClient.get(UrlHelper.topStoryUrl);
+
+      responseJson = _response(response);
+    } on SocketException {
+      throw Exception('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic>getHackernews(int id) async {
+    var responseJson;
+    try {
+      final response = await _httpClient.get(UrlHelper.urlForStory(id));
+      print(response);
       responseJson = _response(response);
     } on SocketException {
       throw Exception('No Internet connection');

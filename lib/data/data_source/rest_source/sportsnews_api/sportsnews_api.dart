@@ -1,15 +1,17 @@
+import 'package:hacker_news/data/app_helper/url_helper.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
-class RestApi {
+class SportsRestApi {
   final _httpClient = http.Client();
 
-  Future<dynamic> get(String url) async {
+    Future<dynamic>getSports() async {
     var responseJson;
     try {
-      final response = await _httpClient.get(url);
+      final response = await _httpClient.get(UrlHelper.cricArticleUrl);
+
       responseJson = _response(response);
     } on SocketException {
       throw Exception('No Internet connection');
