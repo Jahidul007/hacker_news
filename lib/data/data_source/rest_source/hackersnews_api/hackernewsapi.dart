@@ -7,11 +7,10 @@ import 'dart:async';
 class HackerNewsRestApi {
   final _httpClient = http.Client();
 
-  Future<dynamic>getHackernewsId() async {
+  Future<dynamic> getHackernewsId() async {
     var responseJson;
     try {
       final response = await _httpClient.get(UrlHelper.topStoryUrl);
-
       responseJson = _response(response);
     } on SocketException {
       throw Exception('No Internet connection');
@@ -19,7 +18,7 @@ class HackerNewsRestApi {
     return responseJson;
   }
 
-  Future<dynamic>getHackernews(int id) async {
+  Future<dynamic> getHackernews(int id) async {
     var responseJson;
     try {
       final response = await _httpClient.get(UrlHelper.urlForStory(id));

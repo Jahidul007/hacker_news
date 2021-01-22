@@ -58,6 +58,6 @@ class HackerNewsBloc extends Bloc {
   @override
   void dispose() {
     _topStoriesStreamController.close();
-    _repository.dispose();
+
   }
 }
