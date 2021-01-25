@@ -83,7 +83,7 @@ class _CommentListPageState extends State<CommentListPage> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          message,
+          "No data Found",
           style: TextStyle(color: Colors.red),
         ),
       ),

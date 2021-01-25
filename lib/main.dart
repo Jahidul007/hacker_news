@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/ui/Route/route.dart';
+import 'package:hacker_news/ui/features/hacker_news/news_page.dart';
 import 'package:hacker_news/ui/features/splash/splash_screen.dart';
 
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       onGenerateRoute: Router.generateRoute,
-      initialRoute: SplashScreen.homeRoute,
+      initialRoute: NewsPage.newsTestPage,
     );
   }
 }
