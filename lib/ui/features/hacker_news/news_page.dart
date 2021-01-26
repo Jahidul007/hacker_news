@@ -7,6 +7,7 @@ import 'package:hacker_news/data/repository/hacker_news/model/story.dart';
 import 'package:hacker_news/ui/Route/arguments.dart';
 import 'package:hacker_news/ui/features/comments/comments_list_page.dart';
 import 'package:hacker_news/ui/features/sports/sports_page.dart';
+import 'package:hacker_news/ui/language/language_page.dart';
 
 import 'hackernews_bloc/hackernews_bloc.dart';
 import 'hackernews_bloc/hackernews_event.dart';
@@ -46,6 +47,9 @@ class _NewsTestPageState extends State<NewsPage> {
       case 'Sports':
         Navigator.pushNamed(context, SportsPage.sportsPage);
         break;
+      case 'Language':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LanguagePage() ));
+        break;
     }
   }
 
@@ -62,7 +66,7 @@ class _NewsTestPageState extends State<NewsPage> {
               color: Colors.orangeAccent,
               onSelected: handleClick,
               itemBuilder: (BuildContext context) {
-                return {'Sports'}.map((String choice) {
+                return {'Sports','Language'}.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
