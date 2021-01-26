@@ -14,7 +14,7 @@ import 'hackernews_bloc/hackernews_state.dart';
 
 
 class NewsPage extends StatefulWidget {
-  static const String newsTestPage = '/newsTestPage';
+  static const String newsTestPage = '/';
 
   @override
   _NewsTestPageState createState() => _NewsTestPageState();

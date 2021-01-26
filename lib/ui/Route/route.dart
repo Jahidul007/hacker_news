@@ -20,8 +20,6 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final Arguments args = settings.arguments;
     switch (settings.name) {
-      case SplashScreen.homeRoute:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
       case HackerNewsPage.newsPage:
         return MaterialPageRoute(
             builder: (context) => Provider<HackerNewsBloc>(
@@ -40,6 +38,7 @@ class Router {
                   create: (context) => ArticleBloc(repository: ArticleRepositoryImpl()),
                   child: SportsPage(),
                 ));
+
       case NewsPage.newsTestPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<HackerBloc>(
