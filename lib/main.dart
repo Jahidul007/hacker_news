@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:hacker_news/ui/Route/route.dart';
 import 'package:hacker_news/ui/features/hacker_news/news_page.dart';
-import 'package:hacker_news/ui/features/splash/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hacker_news/ui/language/app_localizations.dart';
 
